@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Note;
+use App\Crm\Customer\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 

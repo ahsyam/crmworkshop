@@ -2,58 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use Crm\Customer\Requests\CreateCustomer;
+use Crm\Customer\Services\CustomerService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CustomerController extends Controller
 {
+    private CustomerService $customerService;
+
+    public function __construct(CustomerService $customerService)
+    {
+        $this->customerService = $customerService;
+    }
 
     public function index(Request $request)
     {
-        return Customer::all();
+        return $this->customerService->index($request);
     }
 
     public function show($id)
     {
-        return Customer::find($id) ?? response()->json(['status'=> 'Not found'], Response::HTTP_NOT_FOUND);
+        return $this->customerService->show($id) ?? response()->json(['status'=> 'Not found'], Response::HTTP_NOT_FOUND);
     }
 
-    public function create(Request $request)
+    public function create(CreateCustomer $request)
     {
-        $customer = new Customer();
-        $customer->name = $request->get('name');
-        $customer->save();
-
-        return $customer;
+        return $this->customerService->create($request->name);
     }
 
 
     public function update(Request $request, $id)
     {
-        $customer = Customer::find($id);
-
-        if(!$customer) {
-            return response()->json(['status'=> 'Not found'], Response::HTTP_NOT_FOUND);
-        }
-
-        $customer->name = $request->get('name');
-        $customer->save();
-
-        return $customer;
+        return $this->customerService->update($request, $id);
     }
 
 
     public function delete(Request $request, $id)
     {
-        $customer = Customer::find($id);
-
-        if(!$customer) {
-            return response()->json(['status'=> 'Not found'], Response::HTTP_NOT_FOUND);
-        }
-        $customer->delete();
-
-        return response()->json(['status'=> 'deleted'], Response::HTTP_OK);
+        return $this->customerService->delete($request, (int) $id);
     }
 
 }

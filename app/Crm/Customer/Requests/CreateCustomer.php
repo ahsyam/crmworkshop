@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Crm\Customer\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Crm\Base\Requests\ApiRequest;
 
-class ApiRequest extends FormRequest
+class CreateCustomer extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ApiRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class ApiRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:3'
         ];
     }
 }
