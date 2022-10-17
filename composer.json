@@ -27,7 +27,10 @@
             "Crm\\": "app/Crm",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Crm/Base/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

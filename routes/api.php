@@ -23,8 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('customers/{id}', [CustomerController::class,'show']);
 Route::patch('customers/{id}', [CustomerController::class,'update']);
 Route::delete('customers/{id}', [CustomerController::class,'delete']);
-Route::post('customers', [CustomerController::class,'create']);
-Route::get('customers', [CustomerController::class,'index']);
+    Route::post('customers/export', [CustomerController::class,'export']);
+    Route::post('customers', [CustomerController::class,'create']);
+    Route::get('customers', [CustomerController::class,'index']);
 
 
 Route::get('customers/{customerId}/notes/{id}', [NotesController::class,'show']);
